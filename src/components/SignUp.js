@@ -106,6 +106,8 @@ class SignUpForm extends Component {
   }
 }
 
+//################### Sign Up Link ###################
+//used in the sign in when the user don't have an account registered yet
 const SignUpLink = () => (
   <p>
     Don't have an account? <Link to={routes.SIGN_UP}>Sign Up</Link>
