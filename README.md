@@ -1,5 +1,22 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+
+
+## 
+
+- constants: 
+  - routes: store app routes
+
+- landing page: It's the root route
+- home page: It's a protected route
+- account page: where the user can change/reset its password. Only reachable for authenticated users
+- forget page: for when the user forgets its password. Reachable for unauthenticed users
+
+
+
+
+
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
