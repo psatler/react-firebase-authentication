@@ -14,6 +14,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - forget page: for when the user forgets its password. Reachable for unauthenticed users
 
 
+session handling
+  - Is there any user currently signed in? 
 
 
 

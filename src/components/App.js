@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
 import logo from "./logo.svg";
 
+import { firebase } from "../firebase";
 import * as routes from "../constants/routes";
 
 //nav stuff
@@ -14,27 +15,46 @@ import PasswordForgetPage from "./PasswordForget";
 import HomePage from "./Home";
 import AccountPage from "./Account";
 
-const App = () => (
-  // <div className="App">
-  <BrowserRouter>
-    <div>
-      <Navigation />
+class App extends Component {
+  //holds info about if an user is signed in or not
+  state = {
+    authUser: null
+  };
 
-      <hr />
+  componentDidMount() {
+    //a listener for the authenticated user
+    //if the user signs out, the authUser becomes null
+    firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+        ? this.setState({ authUser })
+        : this.setState({ authUser: null });
+    });
+  }
 
-      <Route exact path={routes.LANDING} component={LandingPage} />
-      <Route exact path={routes.SIGN_UP} component={SignUpPage} />
-      <Route exact path={routes.SIGN_IN} component={SignInPage} />
-      <Route
-        exact
-        path={routes.PASSWORD_FORGET}
-        component={PasswordForgetPage}
-      />
-      <Route exact path={routes.HOME} component={HomePage} />
-      <Route exact path={routes.ACCOUNT} component={AccountPage} />
-    </div>
-  </BrowserRouter>
-  // </div>
-);
+  render() {
+    return (
+      // <div className="App">
+      <BrowserRouter>
+        <div>
+          <Navigation authUser={this.state.authUser} />
+
+          <hr />
+
+          <Route exact path={routes.LANDING} component={LandingPage} />
+          <Route exact path={routes.SIGN_UP} component={SignUpPage} />
+          <Route exact path={routes.SIGN_IN} component={SignInPage} />
+          <Route
+            exact
+            path={routes.PASSWORD_FORGET}
+            component={PasswordForgetPage}
+          />
+          <Route exact path={routes.HOME} component={HomePage} />
+          <Route exact path={routes.ACCOUNT} component={AccountPage} />
+        </div>
+      </BrowserRouter>
+      // </div>
+    );
+  }
+}
 
 export default App;
