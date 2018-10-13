@@ -11,7 +11,7 @@ const AccountPage = () => (
     {authUser => (
       <div>
         <h1>Account email: {authUser.email}</h1>
-        <h3>Account name: {authUser.displayName} </h3>
+        {/* <h3>Account name: {authUser.displayName} </h3> */}
 
         {/* disabling password changes/resets if user is logged in through facebook */}
         {authUser.providerData[0].providerId === "facebook.com" ? null : (
