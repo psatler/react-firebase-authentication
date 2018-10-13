@@ -54,7 +54,7 @@ class PasswordChangeForm extends Component {
           placeholder="Confirm New Password"
         />
         <button disabled={isInvalid} type="submit">
-          Reset My Password
+          Change My Password
         </button>
 
         {error && <p>{error.message}</p>}
