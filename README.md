@@ -28,6 +28,10 @@ npm start
 
 A live demo of the project can be found [here]()
 
+## How to Deploy
+
+Make sure you have the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) installed. Then, just follow [this](https://github.com/mars/create-react-app-buildpack#quick-start) instructions.
+
 ## Main Dependecies
 
 - [React Router 4](https://reacttraining.com/react-router/core/guides/philosophy): Declarative Routing for React.js
