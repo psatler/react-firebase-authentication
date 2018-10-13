@@ -1,6 +1,8 @@
 import React from "react";
 import { firebase } from "../firebase";
 
+import AuthUserContext from "./AuthUserContext"; //using provider's context api
+
 const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
     state = {
@@ -14,8 +16,15 @@ const withAuthentication = Component => {
           : this.setState({ authUser: null });
       });
     }
+
     render() {
-      return <Component {...this.props} />;
+      const { authUser } = this.state;
+      return (
+        //   passing down the authUser value, so other components can consume it
+        <AuthUserContext.Provider value={authUser}>
+          <Component {...this.props} />
+        </AuthUserContext.Provider>
+      );
     }
   }
 

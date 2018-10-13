@@ -15,70 +15,70 @@ import PasswordForgetPage from "./PasswordForget";
 import HomePage from "./Home";
 import AccountPage from "./Account";
 
-// import withAuthentication from "./withAuthentication";
+import withAuthentication from "./withAuthentication";
 
-// const App = () => (
-//   <BrowserRouter>
-//     <div>
-//       <Navigation />
+const App = () => (
+  <BrowserRouter>
+    <div>
+      <Navigation />
 
-//       <hr />
+      <hr />
 
-//       <Route exact path={routes.LANDING} component={LandingPage} />
-//       <Route exact path={routes.SIGN_UP} component={SignUpPage} />
-//       <Route exact path={routes.SIGN_IN} component={SignInPage} />
-//       <Route
-//         exact
-//         path={routes.PASSWORD_FORGET}
-//         component={PasswordForgetPage}
-//       />
-//       <Route exact path={routes.HOME} component={HomePage} />
-//       <Route exact path={routes.ACCOUNT} component={AccountPage} />
-//     </div>
-//   </BrowserRouter>
-// );
+      <Route exact path={routes.LANDING} component={LandingPage} />
+      <Route exact path={routes.SIGN_UP} component={SignUpPage} />
+      <Route exact path={routes.SIGN_IN} component={SignInPage} />
+      <Route
+        exact
+        path={routes.PASSWORD_FORGET}
+        component={PasswordForgetPage}
+      />
+      <Route exact path={routes.HOME} component={HomePage} />
+      <Route exact path={routes.ACCOUNT} component={AccountPage} />
+    </div>
+  </BrowserRouter>
+);
 
-class App extends Component {
-  //holds info about if an user is signed in or not
-  state = {
-    authUser: null
-  };
+// class App extends Component {
+//   //holds info about if an user is signed in or not
+//   state = {
+//     authUser: null
+//   };
 
-  componentDidMount() {
-    //a listener for the authenticated user
-    //if the user signs out, the authUser becomes null
-    firebase.auth.onAuthStateChanged(authUser => {
-      authUser
-        ? this.setState({ authUser })
-        : this.setState({ authUser: null });
-    });
-  }
+//   componentDidMount() {
+//     //a listener for the authenticated user
+//     //if the user signs out, the authUser becomes null
+//     firebase.auth.onAuthStateChanged(authUser => {
+//       authUser
+//         ? this.setState({ authUser })
+//         : this.setState({ authUser: null });
+//     });
+//   }
 
-  render() {
-    return (
-      // <div className="App">
-      <BrowserRouter>
-        <div>
-          <Navigation authUser={this.state.authUser} />
+//   render() {
+//     return (
+//       // <div className="App">
+//       <BrowserRouter>
+//         <div>
+//           <Navigation authUser={this.state.authUser} />
 
-          <hr />
+//           <hr />
 
-          <Route exact path={routes.LANDING} component={LandingPage} />
-          <Route exact path={routes.SIGN_UP} component={SignUpPage} />
-          <Route exact path={routes.SIGN_IN} component={SignInPage} />
-          <Route
-            exact
-            path={routes.PASSWORD_FORGET}
-            component={PasswordForgetPage}
-          />
-          <Route exact path={routes.HOME} component={HomePage} />
-          <Route exact path={routes.ACCOUNT} component={AccountPage} />
-        </div>
-      </BrowserRouter>
-      // </div>
-    );
-  }
-}
+//           <Route exact path={routes.LANDING} component={LandingPage} />
+//           <Route exact path={routes.SIGN_UP} component={SignUpPage} />
+//           <Route exact path={routes.SIGN_IN} component={SignInPage} />
+//           <Route
+//             exact
+//             path={routes.PASSWORD_FORGET}
+//             component={PasswordForgetPage}
+//           />
+//           <Route exact path={routes.HOME} component={HomePage} />
+//           <Route exact path={routes.ACCOUNT} component={AccountPage} />
+//         </div>
+//       </BrowserRouter>
+//       // </div>
+//     );
+//   }
+// }
 
-export default App;
-// export default withAuthentication(App); //using HoC to handle session
+// export default App;
+export default withAuthentication(App); //using HoC to handle session
