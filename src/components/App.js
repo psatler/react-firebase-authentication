@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import { Container } from "reactstrap";
 import "./App.css";
 import logo from "./logo.svg";
 
@@ -19,7 +20,7 @@ import withAuthentication from "./withAuthentication";
 
 const App = () => (
   <BrowserRouter>
-    <div>
+    <Container>
       <Navigation />
 
       <hr />
@@ -34,7 +35,7 @@ const App = () => (
       />
       <Route exact path={routes.HOME} component={HomePage} />
       <Route exact path={routes.ACCOUNT} component={AccountPage} />
-    </div>
+    </Container>
   </BrowserRouter>
 );
 
