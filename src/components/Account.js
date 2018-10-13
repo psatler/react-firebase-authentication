@@ -10,8 +10,6 @@ const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div>
-        {console.log(authUser)}
-
         <h1>Account email: {authUser.email}</h1>
         <h3>Account name: {authUser.displayName} </h3>
 
@@ -27,6 +25,7 @@ const AccountPage = () => (
   </AuthUserContext.Consumer>
 );
 
-const authCondition = authUser => !!authUser;
+const authCondition = authUser =>
+  !!authUser && authUser.providerData[0].providerId !== "facebook.com"; //true and false
 
 export default withAuthorization(authCondition)(AccountPage);
