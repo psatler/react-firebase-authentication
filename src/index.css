@@ -10,23 +10,11 @@ body {
 
 .div-flex {
   display: flex;
-}
-
-.text-center {
-  text-align: center;
+  justify-content: center;
 }
 
 .centered {
-  margin: 0 auto;
   margin-top: 20px;
+  text-align: center;
   /* background: black; */
-}
-
-input {
-  display: flex;
-}
-
-form {
-  /* display: flex; */
-  /* text-align: center; */
 }

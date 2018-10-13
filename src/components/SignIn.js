@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
+import { FacebookLoginButton } from "react-social-login-buttons";
 
 import { withRouter } from "react-router-dom";
 
@@ -10,8 +11,8 @@ import * as routes from "../constants/routes";
 
 const SignInPage = ({ history }) => (
   <div className="div-flex">
-    <div className="centered">
-      <h1 className="text-center">Sign In</h1>
+    <div>
+      <h1 className="centered">Sign In</h1>
       <SignInForm history={history} />
       <SignUpLink />
       <PasswordForgetLink />
@@ -26,7 +27,8 @@ const byPropKey = (propertyName, value) => () => ({
 const INITIAL_STATE = {
   email: "",
   password: "",
-  error: null
+  error: null,
+  showingAlert: false
 };
 
 class SignInForm extends Component {
@@ -45,6 +47,7 @@ class SignInForm extends Component {
       })
       .catch(error => {
         this.setState(byPropKey("error", error));
+        this.timer(); //defined below
       });
 
     event.preventDefault();
@@ -78,13 +81,31 @@ class SignInForm extends Component {
       });
   };
 
+  timer = () => {
+    this.setState({
+      showingAlert: true
+    });
+
+    setTimeout(() => {
+      this.setState({
+        showingAlert: false
+      });
+    }, 4000);
+  };
+
   render() {
-    const { email, password, error } = this.state;
+    const { email, password, error, showingAlert } = this.state;
 
     const isInvalid = password === "" || email === "";
 
     return (
       <div>
+        {showingAlert && (
+          <Alert color="primary" onLoad={this.timer}>
+            {error.message}
+          </Alert>
+        )}
+
         <Form onSubmit={this.onSubmit}>
           <FormGroup>
             <Label for="exampleEmail">Email</Label>
@@ -113,14 +134,28 @@ class SignInForm extends Component {
             />
           </FormGroup>
 
-          <Button disabled={isInvalid} type="submit">
-            Sign In
-          </Button>
-
-          {error && <p>{error.message}</p>}
+          <div className="text-center">
+            <Button disabled={isInvalid} type="submit">
+              Sign In
+            </Button>
+          </div>
         </Form>
 
-        {/* <form onSubmit={this.onSubmit} className="center-form">
+        <hr />
+
+        <FacebookLoginButton onClick={this.facebookLogin} />
+        {/* <button onClick={this.facebookLogin}>Login with Facebook</button> */}
+      </div>
+    );
+  }
+}
+
+export default withRouter(SignInPage);
+
+export { SignInForm };
+
+{
+  /* <form onSubmit={this.onSubmit} className="center-form">
           <input
             value={email}
             onChange={event =>
@@ -142,15 +177,5 @@ class SignInForm extends Component {
           </button>
 
           {error && <p>{error.message}</p>}
-        </form> */}
-
-        <hr />
-        <button onClick={this.facebookLogin}>Login with Facebook</button>
-      </div>
-    );
-  }
+        </form> */
 }
-
-export default withRouter(SignInPage);
-
-export { SignInForm };
