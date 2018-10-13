@@ -1,4 +1,4 @@
-import { auth } from "./firebase"; //importing the previously instatiated object from the firebase.js config file
+import { auth, facebookProvider } from "./firebase"; //importing the previously instatiated object from the firebase.js config file
 
 //## below the authentication functions ##
 
@@ -21,3 +21,7 @@ export const doPasswordReset = email => auth.sendPasswordResetEmail(email);
 //password change
 export const doPasswordChange = password =>
   auth.currentUser.updatePassword(password);
+
+//#### for
+//     facebook #####
+export const doFacebookSignIn = () => auth.signInWithPopup(facebookProvider);
