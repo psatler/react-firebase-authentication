@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 import { SignUpLink } from "./SignUp";
 import { PasswordForgetLink } from "./PasswordForget";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import * as routes from "../constants/routes";
 
 const SignInPage = ({ history }) => (
@@ -50,12 +50,27 @@ class SignInForm extends Component {
     const { history } = this.props;
     auth
       .doFacebookSignIn()
-      .then(() => {
-        // this.setState({ ...INITIAL_STATE });
-        history.push(routes.HOME);
+      .then(authUser => {
+        console.log("authUser", authUser);
+
+        db.doCreateUser(
+          //store some info from facebook into the firebase db
+          authUser.user.uid,
+          authUser.user.displayName,
+          authUser.user.email
+        )
+          .then(() => {
+            // this.setState({
+            //   ...INITIAL_STATE
+            // });
+            history.push(routes.HOME); //redirects to Home Page
+          })
+          .catch(error => {
+            this.setState(byPropKey("error", error));
+          });
       })
       .catch(error => {
-        // this.setState(byPropKey("error", error));
+        this.setState(byPropKey("error", error));
       });
   };
 

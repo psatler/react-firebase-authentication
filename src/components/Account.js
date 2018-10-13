@@ -14,8 +14,14 @@ const AccountPage = () => (
 
         <h1>Account email: {authUser.email}</h1>
         <h3>Account name: {authUser.displayName} </h3>
-        <PasswordForgetForm />
-        <PasswordChangeForm />
+
+        {/* disabling password changes/resets if user is logged in through facebook */}
+        {authUser.providerData[0].providerId === "facebook.com" ? null : (
+          <div>
+            <PasswordForgetForm />
+            <PasswordChangeForm />
+          </div>
+        )}
       </div>
     )}
   </AuthUserContext.Consumer>
