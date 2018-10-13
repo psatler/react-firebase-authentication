@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+
 import { withRouter } from "react-router-dom";
 
 import { SignUpLink } from "./SignUp";
@@ -7,11 +9,13 @@ import { auth, db } from "../firebase";
 import * as routes from "../constants/routes";
 
 const SignInPage = ({ history }) => (
-  <div>
-    <h1>SignIn</h1>
-    <SignInForm history={history} />
-    <SignUpLink />
-    <PasswordForgetLink />
+  <div className="div-flex">
+    <div className="centered">
+      <h1 className="text-center">Sign In</h1>
+      <SignInForm history={history} />
+      <SignUpLink />
+      <PasswordForgetLink />
+    </div>
   </div>
 );
 
@@ -81,7 +85,42 @@ class SignInForm extends Component {
 
     return (
       <div>
-        <form onSubmit={this.onSubmit} className="center-form">
+        <Form onSubmit={this.onSubmit}>
+          <FormGroup>
+            <Label for="exampleEmail">Email</Label>
+            <Input
+              type="email"
+              name="email"
+              id="exampleEmail"
+              placeholder="user@gmail.com"
+              value={email}
+              onChange={event =>
+                this.setState(byPropKey("email", event.target.value))
+              }
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="examplePassword">Password</Label>
+            <Input
+              type="password"
+              name="password"
+              id="examplePassword"
+              placeholder="pass-test"
+              value={password}
+              onChange={event =>
+                this.setState(byPropKey("password", event.target.value))
+              }
+            />
+          </FormGroup>
+
+          <Button disabled={isInvalid} type="submit">
+            Sign In
+          </Button>
+
+          {error && <p>{error.message}</p>}
+        </Form>
+
+        {/* <form onSubmit={this.onSubmit} className="center-form">
           <input
             value={email}
             onChange={event =>
@@ -103,7 +142,7 @@ class SignInForm extends Component {
           </button>
 
           {error && <p>{error.message}</p>}
-        </form>
+        </form> */}
 
         <hr />
         <button onClick={this.facebookLogin}>Login with Facebook</button>

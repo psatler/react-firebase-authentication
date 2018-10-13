@@ -8,11 +8,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.center-form {
-  /* display: flex;
-  justify-content: center; */
-  /* align-items: center; */
-  /* text-align: center; */
+.div-flex {
+  display: flex;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.centered {
+  margin: 0 auto;
+  margin-top: 20px;
+  /* background: black; */
 }
 
 input {
