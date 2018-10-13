@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import { FacebookLoginButton } from "react-social-login-buttons";
+import logo from "./logo.svg";
 
 import { withRouter } from "react-router-dom";
 
@@ -9,16 +10,20 @@ import { PasswordForgetLink } from "./PasswordForget";
 import { auth, db } from "../firebase";
 import * as routes from "../constants/routes";
 
-const SignInPage = ({ history }) => (
-  <div className="div-flex">
-    <div>
-      <h1 className="centered">Sign In</h1>
-      <SignInForm history={history} />
-      <SignUpLink />
-      <PasswordForgetLink />
+const SignInPage = ({ history }) => {
+  return (
+    <div className="div-flex">
+      <div>
+        <h1 className="centered">Sign In</h1>
+        {/* <img src={logo} className="App-logo" alt="My logo" /> */}
+
+        <SignInForm history={history} />
+        <SignUpLink />
+        <PasswordForgetLink />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value

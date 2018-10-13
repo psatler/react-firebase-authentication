@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Container } from "reactstrap";
 import "./App.css";
-import logo from "./logo.svg";
 
 import { firebase } from "../firebase";
 import * as routes from "../constants/routes";
