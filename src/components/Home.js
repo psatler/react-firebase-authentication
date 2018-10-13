@@ -32,9 +32,11 @@ class HomePage extends Component {
     return (
       <div>
         <h1>Home</h1>
-        {!loading && <p>Hello {username}</p>}
+        {!loading && <p className="centered">Hello {username}!</p>}
 
-        <p>The Home Page is accessible by every signed in user.</p>
+        <p style={{ marginTop: "80px" }}>
+          NOTE: This page is only accessible by signed in users.
+        </p>
         {/* {!!users && <UserList users={users} />} */}
       </div>
     );
