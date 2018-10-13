@@ -1,6 +1,6 @@
 # Reactjs with Firebase Authentication
 
-> A live demo of the project is found [here]().
+> A live demo of the project is found [here](https://react-firebase-authentication.herokuapp.com/).
 
 This a simple Reactjs project showcasing use of firebase authentication. It has both public and private endpoints. Private endpoints are protected using session handling.
 
@@ -26,11 +26,15 @@ cd react-firebase-authentication
 npm start
 ```
 
-A live demo of the project can be found [here]()
+A live demo of the project can be found [here](https://react-firebase-authentication.herokuapp.com/)
 
 ## How to Deploy
 
 Make sure you have the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) installed. Then, just follow [this](https://github.com/mars/create-react-app-buildpack#quick-start) instructions.
+
+Remember to add your new domain to the Firebase Console: firebase console -> Authentication -> Sign-in Method Tab -> Authorized Domains Section (at the bottom of the page)
+
+NOTE: for the Facebook Login button, you need to create an app at [Facebook Developers](https://developers.facebook.com/).
 
 ## Main Dependecies
 
