@@ -15,6 +15,29 @@ import PasswordForgetPage from "./PasswordForget";
 import HomePage from "./Home";
 import AccountPage from "./Account";
 
+// import withAuthentication from "./withAuthentication";
+
+// const App = () => (
+//   <BrowserRouter>
+//     <div>
+//       <Navigation />
+
+//       <hr />
+
+//       <Route exact path={routes.LANDING} component={LandingPage} />
+//       <Route exact path={routes.SIGN_UP} component={SignUpPage} />
+//       <Route exact path={routes.SIGN_IN} component={SignInPage} />
+//       <Route
+//         exact
+//         path={routes.PASSWORD_FORGET}
+//         component={PasswordForgetPage}
+//       />
+//       <Route exact path={routes.HOME} component={HomePage} />
+//       <Route exact path={routes.ACCOUNT} component={AccountPage} />
+//     </div>
+//   </BrowserRouter>
+// );
+
 class App extends Component {
   //holds info about if an user is signed in or not
   state = {
@@ -58,3 +81,4 @@ class App extends Component {
 }
 
 export default App;
+// export default withAuthentication(App); //using HoC to handle session
