@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 
 import * as routes from "../constants/routes";
 import { auth, db } from "../firebase";
 
 const SignUpPage = ({ history }) => (
   <div>
-    <h1>SignUp</h1>
-    <SignUpForm history={history} />
+    <div className="div-flex">
+      <div>
+        <h1 className="centered">Sign Up</h1>
+        <SignUpForm history={history} />
+      </div>
+    </div>
   </div>
 );
 
@@ -17,7 +22,8 @@ const INITIAL_STATE = {
   email: "",
   passwordOne: "",
   passwordTwo: "",
-  error: null
+  error: null,
+  showingAlert: false
 };
 
 //A Higher order function with prop name as key and the value to be assigned to
@@ -58,13 +64,33 @@ class SignUpForm extends Component {
       })
       .catch(err => {
         this.setState(byPropKey("error", err));
+        this.timer(); //show alert message for some seconds
       });
 
     event.preventDefault(); //prevents refreshing
   };
 
+  timer = () => {
+    this.setState({
+      showingAlert: true
+    });
+
+    setTimeout(() => {
+      this.setState({
+        showingAlert: false
+      });
+    }, 4000);
+  };
+
   render() {
-    const { username, email, passwordOne, passwordTwo, error } = this.state;
+    const {
+      username,
+      email,
+      passwordOne,
+      passwordTwo,
+      error,
+      showingAlert
+    } = this.state;
     //a boolen to perform validation
     const isInvalid =
       passwordOne !== passwordTwo ||
@@ -73,42 +99,71 @@ class SignUpForm extends Component {
       username === "";
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          value={username}
-          onChange={e => this.setState(byPropKey("username", e.target.value))}
-          // onChange={e => this.onChange("username", e.target.value)}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          value={email}
-          onChange={e => this.setState(byPropKey("email", e.target.value))}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          value={passwordOne}
-          onChange={e =>
-            this.setState(byPropKey("passwordOne", e.target.value))
-          }
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          value={passwordTwo}
-          onChange={e =>
-            this.setState(byPropKey("passwordTwo", e.target.value))
-          }
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign Up
-        </button>
+      <div>
+        {showingAlert && (
+          <Alert color="danger" onLoad={this.timer}>
+            {error.message}
+          </Alert>
+        )}
+        <Form onSubmit={this.onSubmit}>
+          <FormGroup>
+            <Label for="userName">Full Name</Label>
+            <Input
+              type="username"
+              name="username"
+              id="userName"
+              placeholder="John Doe"
+              value={username}
+              onChange={e =>
+                this.setState(byPropKey("username", e.target.value))
+              }
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="exampleEmail">Email</Label>
+            <Input
+              type="email"
+              name="email"
+              id="exampleEmail"
+              placeholder="user@gmail.com"
+              value={email}
+              onChange={e => this.setState(byPropKey("email", e.target.value))}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="examplePassword1">Password</Label>
+            <Input
+              type="password"
+              name="password"
+              id="examplePassword1"
+              placeholder="Password"
+              value={passwordOne}
+              onChange={e =>
+                this.setState(byPropKey("passwordOne", e.target.value))
+              }
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="examplePassword2">Confirm Password</Label>
+            <Input
+              type="password"
+              name="password"
+              id="examplePassword2"
+              placeholder="Confirm Password"
+              value={passwordTwo}
+              onChange={e =>
+                this.setState(byPropKey("passwordTwo", e.target.value))
+              }
+            />
+          </FormGroup>
 
-        {error && <p>{error.message}</p>}
-      </form>
+          <div className="text-center">
+            <Button disabled={isInvalid} type="submit">
+              Sign Up
+            </Button>
+          </div>
+        </Form>
+      </div>
     );
   }
 }
@@ -124,3 +179,40 @@ const SignUpLink = () => (
 //exports
 export default withRouter(SignUpPage); //using a HoC to get access to history
 export { SignUpForm, SignUpLink };
+
+// <form onSubmit={this.onSubmit}>
+//   <input
+//     value={username}
+//     onChange={e => this.setState(byPropKey("username", e.target.value))}
+//     // onChange={e => this.onChange("username", e.target.value)}
+//     type="text"
+//     placeholder="Full Name"
+//   />
+//   <input
+//     value={email}
+//     onChange={e => this.setState(byPropKey("email", e.target.value))}
+//     type="text"
+//     placeholder="Email Address"
+//   />
+//   <input
+//     value={passwordOne}
+//     onChange={e =>
+//       this.setState(byPropKey("passwordOne", e.target.value))
+//     }
+//     type="password"
+//     placeholder="Password"
+//   />
+//   <input
+//     value={passwordTwo}
+//     onChange={e =>
+//       this.setState(byPropKey("passwordTwo", e.target.value))
+//     }
+//     type="password"
+//     placeholder="Confirm Password"
+//   />
+//   <button disabled={isInvalid} type="submit">
+//     Sign Up
+//   </button>
+
+//   {error && <p>{error.message}</p>}
+// </form>

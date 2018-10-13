@@ -101,7 +101,7 @@ class SignInForm extends Component {
     return (
       <div>
         {showingAlert && (
-          <Alert color="primary" onLoad={this.timer}>
+          <Alert color="danger" onLoad={this.timer}>
             {error.message}
           </Alert>
         )}
