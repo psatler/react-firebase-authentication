@@ -13,21 +13,27 @@ import AuthUserContext from "./AuthUserContext";
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
-    {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
+    {authUser =>
+      authUser ? <NavigationAuth userInfo={authUser} /> : <NavigationNonAuth />
+    }
   </AuthUserContext.Consumer>
 );
 
-const NavigationAuth = () => (
+const NavigationAuth = ({ userInfo }) => (
   <ul>
+    {/* {console.log("NavigationAuth", userInfo)} */}
     <li>
       <Link to={routes.LANDING}>Landing</Link>
     </li>
     <li>
       <Link to={routes.HOME}>Home</Link>
     </li>
-    <li>
-      <Link to={routes.ACCOUNT}>Account</Link>
-    </li>
+    {/* disabling password changes/resets if user is logged in through facebook */}
+    {userInfo.providerData[0].providerId === "facebook.com" ? null : (
+      <li>
+        <Link to={routes.ACCOUNT}>Account</Link>
+      </li>
+    )}
     <li>
       <SignOutButton />
     </li>
