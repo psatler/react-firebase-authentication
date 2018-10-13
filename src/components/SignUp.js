@@ -60,6 +60,7 @@ class SignUpForm extends Component {
           })
           .catch(error => {
             this.setState(byPropKey("error", error));
+            this.timer(); //show alert message for some seconds
           });
       })
       .catch(err => {
