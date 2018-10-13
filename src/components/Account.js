@@ -9,17 +9,19 @@ const AccountPage = () => (
   //authUser is passed down via Context API (It is set at withAuthentication.js file)
   <AuthUserContext.Consumer>
     {authUser => (
-      <div>
-        <h1>Account email: {authUser.email}</h1>
-        {/* <h3>Account name: {authUser.displayName} </h3> */}
-
-        {/* disabling password changes/resets if user is logged in through facebook */}
-        {authUser.providerData[0].providerId === "facebook.com" ? null : (
-          <div>
-            <PasswordForgetForm />
-            <PasswordChangeForm />
-          </div>
-        )}
+      <div className="div-flex">
+        <div>
+          <h5 className="centered">
+            Change/Reset Password for : {authUser.email}
+          </h5>
+          {/* disabling password changes/resets if user is logged in through facebook */}
+          {authUser.providerData[0].providerId === "facebook.com" ? null : (
+            <div>
+              <PasswordForgetForm />
+              <PasswordChangeForm />
+            </div>
+          )}
+        </div>
       </div>
     )}
   </AuthUserContext.Consumer>
