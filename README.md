@@ -14,7 +14,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - `/signin`: where the user is able to login either through Facebook or via email/password
 - `/signup`: where the user can signup using email/password.
 - `/account`: protected endpoint, available only for users registered using email/password. At this endpoint, they can modify/reset their password.
-- `/home`: procteted endpoint, reachable only for authenticated users.
+- `/home`: protected endpoint, reachable only for authenticated users.
 
 ## How to run
 
