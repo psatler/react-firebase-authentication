@@ -19,6 +19,7 @@ const withAuthentication = Component => {
 
     render() {
       const { authUser } = this.state;
+      console.log("withAuthentication file authUser", authUser);
       return (
         //   passing down the authUser value, so other components can consume it
         <AuthUserContext.Provider value={authUser}>
