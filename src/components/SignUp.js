@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 
 import * as routes from "../constants/routes";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 
 const SignUpPage = ({ history }) => (
   <div>
@@ -44,10 +44,17 @@ class SignUpForm extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       //it the above functions resolves, reset the state to its initial state values, otherwise, set the error object
       .then(authUser => {
-        this.setState({
-          ...INITIAL_STATE
-        });
-        history.push(routes.HOME); //redirects to Home Page
+        //creating a user in the database after the sign up through Firebase auth API
+        db.doCreateUser(authUser.user.uid, username, email)
+          .then(() => {
+            this.setState({
+              ...INITIAL_STATE
+            });
+            history.push(routes.HOME); //redirects to Home Page
+          })
+          .catch(error => {
+            this.setState(byPropKey("error", error));
+          });
       })
       .catch(err => {
         this.setState(byPropKey("error", err));
